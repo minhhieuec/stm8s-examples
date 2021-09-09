@@ -17,3 +17,14 @@
 
 ![IR Remote](docs/schematic.png)
 
+## Output
+
+push key POWER on remote, the picture following is result:
+
+- Live Watch on IAR IDE: `0xFFA25D`
+
+![Live watch](docs/power_button_ir_cmd.png)
+
+- Analyzer: : `0xFFA25D`
+
+![analyzer](docs/power-ir-cmd.png)
