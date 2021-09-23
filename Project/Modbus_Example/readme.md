@@ -1,46 +1,51 @@
-# Generate PWM With Timer 1 Chanel 4
+# Slave Modbus RTU Example
+
+![modbus rtu protocol](docs/modbus-rtu-protocol.png)
 
 ## Hardware
 - mcu: `STM8S103F3P6`
 
-## Configuration
+## Tool test
 
-### System clock
+- https://sourceforge.net/projects/qmodmaster/
 
-This example using 16MHz clock from HSI.
+## Circuit
 
+| STM8S           | Uart TTL        |
+| -------------   | -------------   |
+| PD5 (TX)        | RX              |
+| PD6 (RX)        | TX              |
+| GND             | GND             |
+
+## Test
+
+### Function code "Read Input Register (0x04)"
+
+![read_input_register](docs/read_input_register.png)
+
+#### Set Start address:
 ```c
-void SystemClock_Init(void)
-{
-   CLK_DeInit();
-   CLK_HSICmd(ENABLE);
-   CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
-   CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
-}
+#define REG_INPUT_START 0x0000
 ```
 
-### Timer Tick
-
+#### Set register length (Quantity):
 ```c
-uint16_t prescaler = 15;
-TIM1_TimeBaseInit(prescaler, TIM1_COUNTERMODE_UP, period, 0);
+#define REG_INPUT_NREGS 2
 ```
 
-setup timer tick is `1ms`: `1/(16000000/(prescaler + 1))`
+### Function code "Read Holding Register (0x03)"
 
+![read_holding_register](docs/read_holding_register.png)
 
-### PWM config
-
+#### Set Start address:
 ```c
-uint16_t period = 999;
-TIM1_OC4Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE, ((period+1)/2), TIM1_OCPOLARITY_HIGH, TIM1_OCIDLESTATE_RESET);
-TIM1_OC4PreloadConfig(ENABLE);
+#define REG_HOLDING_START 0x0000
 ```
 
-This example using timer1 as pwm mode. 
-`((period+1)/2)` for 50% duty cycle.
-
-![50 percent duty cycle](docs/pwm_50percent_1ms.png)
+#### Set holding length (Quantity):
+```c
+#define REG_HOLDING_NREGS 1
+```
 
 
 ## References
