@@ -1,5 +1,7 @@
 # Slave Modbus RTU Example
 
+I'm using freemodbus v1.6 for this example (https://www.embedded-experts.at/en/freemodbus-downloads/).
+
 ![modbus rtu protocol](docs/modbus-rtu-protocol.png)
 
 ## Hardware
@@ -8,6 +10,7 @@
 ## Tool test
 
 - https://sourceforge.net/projects/qmodmaster/
+- https://www.modbustools.com/download.html
 
 ## Circuit
 
